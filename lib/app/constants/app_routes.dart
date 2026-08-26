@@ -8,4 +8,5 @@ abstract class AppRoutes {
   static const String matchmaking = '/matchmaking';
   static const String game = '/game/:roomId';
   static const String result = '/result/:gameId';
+  static const String leaderboard = '/leaderboard';
 }

@@ -14,12 +14,11 @@ abstract class AppTheme {
         surface: AppColors.surface,
         background: AppColors.background,
       ),
-      textTheme: GoogleFonts.notoSansJpTextTheme(
-        ThemeData.dark().textTheme,
-      ).apply(
-        bodyColor: AppColors.textLight,
-        displayColor: AppColors.textLight,
-      ),
+      textTheme: GoogleFonts.notoSansJpTextTheme(ThemeData.dark().textTheme)
+          .apply(
+            bodyColor: AppColors.textLight,
+            displayColor: AppColors.textLight,
+          ),
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -33,11 +32,17 @@ abstract class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          textStyle: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
+          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
+      ),
+
+      chipTheme: ChipThemeData(
+        selectedColor: Colors.teal,
+        backgroundColor: Colors.blueGrey[50],
+        labelStyle: TextStyle(color: Colors.black),
+        secondaryLabelStyle: TextStyle(
+          color: Colors.white,
+        ), // Style for selected text
       ),
     );
   }

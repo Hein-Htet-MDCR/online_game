@@ -209,6 +209,10 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final bool isDraw = session.winnerId == null;
     final bool isWinner = session.winnerId == currentUserId;
 
+    final isHost = session.hostId == currentUserId;
+    final myScore = isHost ? session.hostScore : session.guestScore;
+    final opponentScore = isHost ? session.guestScore : session.hostScore;
+
     if (isWinner) {
       audio.playVictory();
     } else if (!isDraw) {
@@ -238,8 +242,23 @@ class _GameScreenState extends ConsumerState<GameScreen> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Host Score: ${session.hostScore}'),
-            Text('Guest Score: ${session.guestScore}'),
+            // Text(
+            //   'Host Score: ${session.hostScore}',
+            //   style: const TextStyle(color: Colors.orange),
+            // ),
+            Text(
+              'Your Score: ${myScore}',
+              style: const TextStyle(color: Colors.orange),
+            ),
+            // Text(
+            //   'Guest Score: ${session.guestScore}',
+            //   style: const TextStyle(color: Colors.blue),
+            // ),
+            Text(
+              'Opponent\'s Score: ${opponentScore}',
+              style: const TextStyle(color: Colors.blue),
+            ),
+
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {

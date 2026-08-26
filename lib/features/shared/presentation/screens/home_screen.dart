@@ -28,6 +28,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     return Column(
       children: [
+        AppBar(
+          title: const Text('Japanese Matching Game'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.leaderboard),
+              tooltip: 'Leaderboard & History',
+              onPressed: () {
+                context.push('/leaderboard');
+              },
+            ),
+          ],
+        ),
         const SizedBox(height: 12),
         // User Profile Header
         profileAsync.when(
