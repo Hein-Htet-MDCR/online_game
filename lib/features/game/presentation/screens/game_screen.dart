@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:online_game/core/services/audio_service.dart';
 import 'package:online_game/features/game/domain/game_card_tile.dart';
 import 'package:online_game/features/game/domain/game_session.dart';
 import '../../../../app/constants/app_colors.dart';
@@ -204,8 +205,15 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     GameSession session,
     String? currentUserId,
   ) {
+    final audio = ref.read(audioServiceProvider);
     final bool isDraw = session.winnerId == null;
     final bool isWinner = session.winnerId == currentUserId;
+
+    if (isWinner) {
+      audio.playVictory();
+    } else if (!isDraw) {
+      audio.playDefeat();
+    }
 
     showDialog(
       context: context,
@@ -230,14 +238,8 @@ class _GameScreenState extends ConsumerState<GameScreen> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              'Host Score: ${session.hostScore}',
-              style: TextStyle(color: Colors.blue),
-            ),
-            Text(
-              'Guest Score: ${session.guestScore}',
-              style: TextStyle(color: Colors.yellow),
-            ),
+            Text('Host Score: ${session.hostScore}'),
+            Text('Guest Score: ${session.guestScore}'),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
